@@ -4,6 +4,8 @@
 //
 //  Created by Lachlan  Wilson on 15/10/19.
 //  Copyright © 2019 Lachlan  Wilson. All rights reserved.
+//  Reference: "https://stackoverflow.com/questions/24231680/loading-downloading-image-from-url-on-swift",
+//      "https://github.com/SwiftyJSON/SwiftyJSON"
 //
 
 import UIKit
@@ -12,14 +14,11 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
     
+    //MARK: Properties
     @IBOutlet weak var name_label: UILabel!
-    
     @IBOutlet weak var gender_label: UILabel!
-    
     @IBOutlet weak var age_label: UILabel!
-    
     @IBOutlet weak var email_label: UILabel!
-    
     @IBOutlet weak var image_view: UIImageView!
     
     
@@ -36,6 +35,7 @@ class ViewController: UIViewController {
         self.age_label.text = String(person.age)
         self.email_label.text = person.email
         
+        //Download image from provided URL and parse as a UIImage
         let url = URL(string: person.download_link)
         
         DispatchQueue.global().async {
@@ -76,23 +76,8 @@ class ViewController: UIViewController {
             
     }
     
+    //MARK: Actions
     @IBAction func button_pressed(_ sender: Any) {
         self.makeRequest()
     }
 }
-
-
-
-
-
-//For image download
-/*
- let url = URL(string: image.url)
- 
- DispatchQueue.global().async {
- let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
- DispatchQueue.main.async {
- imageView.image = UIImage(data: data!)
- }
- }
- */
